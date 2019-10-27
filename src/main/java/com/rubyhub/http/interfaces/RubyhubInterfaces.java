@@ -1,5 +1,6 @@
 package com.rubyhub.http.interfaces;
 
+import com.rubyhub.http.responses.ServiceResponse;
 import org.codehaus.jettison.json.JSONObject;
 
 import javax.ws.rs.GET;
@@ -19,7 +20,7 @@ public class RubyhubInterfaces {
             obj.put("version", "0.0.1");
             obj.put("date", String.join(" ", LocalDateTime.now().toString().split("T")));
             obj.put("info", "Hello from Rubyhub : ) ");
-            return com.sem.fridgely.http.ServiceResponse.response200(obj);
+            return ServiceResponse.response200(obj);
         } catch (Exception e) {
             return Response.status(404).entity("Service is not available now, please try later").build();
         }

@@ -7,9 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="543b9e14-48ca-4e94-8106-96c0ef400f82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/RubyhubInterfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/RubyhubInterfaces.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Buyer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -232,7 +230,7 @@
       <option name="presentableId" value="Default" />
       <updated>1572213102231</updated>
       <workItem from="1572213105020" duration="1690000" />
-      <workItem from="1572215004261" duration="1403000" />
+      <workItem from="1572215004261" duration="1529000" />
     </task>
     <servers />
   </component>
