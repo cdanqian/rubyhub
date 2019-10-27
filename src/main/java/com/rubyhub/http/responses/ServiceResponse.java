@@ -1,4 +1,4 @@
-package com.sem.fridgely.http;
+package com.rubyhub.http.responses;
 
 import org.codehaus.jettison.json.JSONObject;
 

@@ -1,10 +1,11 @@
 package com.rubyhub.models;
 
 import org.bson.Document;
+import org.bson.types.Binary;
 
 public class Buyer {
-    private String id;
-    private String name;
+    private String id,firstname,lastname,;
+    private Binary address;
     private String phone;
 
 
