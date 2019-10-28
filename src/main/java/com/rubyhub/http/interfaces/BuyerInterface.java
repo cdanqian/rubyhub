@@ -19,6 +19,9 @@ import static java.util.stream.Collectors.toList;
 
 @Path("/buyers")
 public class BuyerInterface extends HttpInterface {
+    public static String QUERY_SORT_BY_NAME_ASC = "nameAsc", QUERY_SORT_BY_NAME_DESC = "nameDesc";
+    public static String QUERY_FILTER_BY_NEW_USERS = "newUsers";
+    public static String QUERY_PAGINATE_BY_OFFSET ="offset",QUERY_PAGINATE_BY_COUNT ="count";
     private ObjectWriter ow;
 
     public BuyerInterface() {
@@ -79,7 +82,6 @@ public class BuyerInterface extends HttpInterface {
             } else {
                 buyers = BuyerManager.getInstance().getAllBuyers();
             }
-
             List<JSONObject> content = buyers.stream().map(Buyer::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
         } catch (Exception e) {

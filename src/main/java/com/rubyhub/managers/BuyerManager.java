@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.gt;
+import static com.mongodb.client.model.Filters.*;
 
 public class BuyerManager extends Manager {
     public static BuyerManager _self;
@@ -18,6 +17,7 @@ public class BuyerManager extends Manager {
             FIELD_FNAME = "firstname", FIELD_LNAME = "lastname", FIELD_PHONE = "phone", FIELD_CITY = "city", FIELD_COUNTRY = "country",
             FIELD_EMAIL = "email", FIELD_PW = "passwrod", FIELD_PAYMENT_METHOD = "paymentMethod", FIELD_PAYMENT_ACCOUNT = "paymentAccount",
             FIELD_ADDRESS = "address", FIELD_DELETED = "deleted", FIELD_CREATED_ON = "createdOn", FIELD_UPDATED_ON = "updatedOn", FIELD_DELETED_ON = "deletedOn";
+    private static Bson FILTER_NOT_DELETED = eq(FIELD_DELETED, false);
 
     public static BuyerManager getInstance() {
         if (_self == null) {
@@ -108,7 +108,14 @@ public class BuyerManager extends Manager {
 
     public List<Buyer> getAllBuyersSorted(String sortby) {
         List<Buyer> sList = new ArrayList<Buyer>();
-        Iterable<Document> docs = this.buyerCollection.find(new Document(FIELD_DELETED, false));
+        Bson sort = null;
+        switch (sortby) {
+            case "nameAsc":
+                sort = eq(FIELD_FNAME, 1);
+            case "nameDesc":
+                sort = eq(FIELD_FNAME, 0);
+        }
+        Iterable<Document> docs = this.buyerCollection.find(FILTER_NOT_DELETED).sort(sort);
         if (docs != null) {
             docs.forEach(doc -> sList.add(new Buyer(doc)));
             return sList;
@@ -125,7 +132,7 @@ public class BuyerManager extends Manager {
             case "newUsers":
                 filter = gt(FIELD_CREATED_ON, new Date(System.currentTimeMillis() - (7 * 1000 * 60 * 60 * 24)));
         }
-        Iterable<Document> docs = this.buyerCollection.find(filter);
+        Iterable<Document> docs = this.buyerCollection.find(and(FILTER_NOT_DELETED, filter));
         if (docs != null) {
             docs.forEach(doc -> sList.add(new Buyer(doc)));
             return sList;
@@ -135,10 +142,8 @@ public class BuyerManager extends Manager {
     }
 
     public List<Buyer> getAllBuyersPaginated(Integer offset, Integer count) {
-        Document sortParams = new Document();
-        sortParams.put("riderBalance", 1);
         List<Buyer> sList = new ArrayList<Buyer>();
-        Iterable<Document> docs = this.buyerCollection.find(new Document(FIELD_DELETED, false)).sort(sortParams).skip(offset).limit(count);
+        Iterable<Document> docs = this.buyerCollection.find(FILTER_NOT_DELETED).sort(eq(FIELD_FNAME, 1)).skip(offset).limit(count);
         if (docs != null) {
             docs.forEach(doc -> sList.add(new Buyer(doc)));
             return sList;

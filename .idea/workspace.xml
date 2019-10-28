@@ -15,16 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/responses/ServiceResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/responses/ServiceResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/Manager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/Manager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Buyer.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Buyer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/sem/fridgely/http/ServiceResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/hw5/http/utils/PATCH.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/BuyerInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/BuyerInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/BuyerManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/BuyerManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/utils/PATCH.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/utils/PATCH.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Buyer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Buyer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/BuyerInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/BuyerInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/BuyerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/BuyerManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -250,7 +245,7 @@
       <updated>1572213102231</updated>
       <workItem from="1572213105020" duration="1690000" />
       <workItem from="1572215004261" duration="12152000" />
-      <workItem from="1572229606020" duration="2109000" />
+      <workItem from="1572229606020" duration="3862000" />
     </task>
     <servers />
   </component>
