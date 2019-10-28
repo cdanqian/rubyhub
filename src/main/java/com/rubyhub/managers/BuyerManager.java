@@ -113,7 +113,8 @@ public class BuyerManager extends Manager {
                 sort = new Document(FIELD_FNAME, 1);
                 break;
             case "nameDesc":
-                sort = new Document(FIELD_FNAME, 0);
+                sort = new Document(FIELD_FNAME, -1);
+                System.out.println(sortby);
                 break;
         }
         Iterable<Document> docs = this.buyerCollection.find(FILTER_NOT_DELETED).sort(sort);
