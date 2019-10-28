@@ -47,7 +47,6 @@ public class BuyerManager extends Manager {
     public void delete(String id) {
         Bson filter = eq(FIELD_ID, id);
         Bson content = new Document("$set", new Document(FIELD_DELETED, true).append(FIELD_DELETED_ON, new Date()));
-//        this.buyerCollection.deleteOne(new Document(FIELD_ID, id));
     }
 
     public Buyer updateBasicInfo(String id, String fname, String lname, String phone, String city, String country, JSONArray address) {
@@ -97,7 +96,7 @@ public class BuyerManager extends Manager {
 
     public List<Buyer> getAllBuyers() {
         List<Buyer> sList = new ArrayList<Buyer>();
-        Iterable<Document> docs = this.buyerCollection.find(new Document(FIELD_DELETED, false));
+        Iterable<Document> docs = this.buyerCollection.find(FILTER_NOT_DELETED);
         if (docs != null) {
             docs.forEach(doc -> sList.add(new Buyer(doc)));
             return sList;
@@ -108,12 +107,14 @@ public class BuyerManager extends Manager {
 
     public List<Buyer> getAllBuyersSorted(String sortby) {
         List<Buyer> sList = new ArrayList<Buyer>();
-        Bson sort = null;
+        Document sort = null;
         switch (sortby) {
             case "nameAsc":
-                sort = eq(FIELD_FNAME, 1);
+                sort = new Document(FIELD_FNAME, 1);
+                break;
             case "nameDesc":
-                sort = eq(FIELD_FNAME, 0);
+                sort = new Document(FIELD_FNAME, 0);
+                break;
         }
         Iterable<Document> docs = this.buyerCollection.find(FILTER_NOT_DELETED).sort(sort);
         if (docs != null) {
@@ -131,6 +132,11 @@ public class BuyerManager extends Manager {
         switch (filterBy) {
             case "newUsers":
                 filter = gt(FIELD_CREATED_ON, new Date(System.currentTimeMillis() - (7 * 1000 * 60 * 60 * 24)));
+                break;
+            case "luckyUsers":
+                filter = regex(FIELD_FNAME, "^d","i"); // lucky users: first name start with letter D
+                break;
+
         }
         Iterable<Document> docs = this.buyerCollection.find(and(FILTER_NOT_DELETED, filter));
         if (docs != null) {
