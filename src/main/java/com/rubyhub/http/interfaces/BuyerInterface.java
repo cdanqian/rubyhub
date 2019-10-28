@@ -12,16 +12,12 @@ import org.codehaus.jettison.json.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 @Path("/buyers")
 public class BuyerInterface extends HttpInterface {
-    public static String QUERY_SORT_BY_NAME_ASC = "nameAsc", QUERY_SORT_BY_NAME_DESC = "nameDesc";
-    public static String QUERY_FILTER_BY_NEW_USERS = "newUsers",QUERY_FILTER_BY_LUCKY_USERS = "luckyUsers";
-    public static String QUERY_PAGINATE_BY_OFFSET ="offset",QUERY_PAGINATE_BY_COUNT ="count";
     private ObjectWriter ow;
 
     public BuyerInterface() {
@@ -42,7 +38,7 @@ public class BuyerInterface extends HttpInterface {
     @Path("")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response BuyerPost(Object request) {
+    public Response buyerPost(Object request) {
         try {
             JSONObject json = new JSONObject(ow.writeValueAsString(request));
             String email = json.getString("email");
@@ -62,6 +58,14 @@ public class BuyerInterface extends HttpInterface {
         } catch (Exception e) {
             throw handleException("POST /buyers", e);
         }
+    }
+
+    @GET
+    @Path("/reset")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response resetResource() {
+        BuyerManager.getInstance().resetDB();
+        return ServiceResponse.response200("Buyer collection is ready");
     }
 
     @GET
@@ -92,10 +96,11 @@ public class BuyerInterface extends HttpInterface {
     @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response BooksGetById(@PathParam("id") String id) {
+    public Response buyerGetById(@PathParam("id") String id) {
         try {
-            List<JSONObject> buyers = new ArrayList<JSONObject>();
-            buyers.add(BuyerManager.getInstance().getById(id).castToJSON());
+            JSONArray buyers = new JSONArray();
+            Buyer buyer = BuyerManager.getInstance().getById(id);
+            buyers.put(buyer.castToJSON());
             return ServiceResponse.response200(buyers);
         } catch (Exception e) {
             throw handleException("GET /buyers/id", e);
@@ -105,7 +110,7 @@ public class BuyerInterface extends HttpInterface {
     @DELETE
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response BooksDeleteById(@PathParam("id") String id) {
+    public Response buyerDeleteById(@PathParam("id") String id) {
         try {
             BuyerManager.getInstance().delete(id);
             return ServiceResponse.response200("Buyer " + id + " has been deleted!");
@@ -118,23 +123,23 @@ public class BuyerInterface extends HttpInterface {
     @Path("{id}/basic")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response BooksPatchById(Object request, @PathParam("id") String id) {
+    public Response buyerPatchById(Object request, @PathParam("id") String id) {
         try {
             JSONObject json = new JSONObject(ow.writeValueAsString(request));
             Buyer buyer = BuyerManager.getInstance().updateBasicInfo(
                     id,
-                    json.getString("first_name"),
-                    json.getString("last_name"),
+                    json.getString("firstname"),
+                    json.getString("lastname"),
                     json.getString("phone"),
                     json.getString("city"),
                     json.getString("country"),
-                    json.getJSONArray("address")
+                    json.getJSONObject("address")
             );
-            List<JSONObject> buyers = new ArrayList<JSONObject>();
-            buyers.add(buyer.castToJSON());
+            JSONArray buyers = new JSONArray();
+            buyers.put(buyer.castToJSON());
             return ServiceResponse.response200(buyers);
         } catch (Exception e) {
-            throw handleException("PATCH /books/id", e);
+            throw handleException("PATCH /buyers/id/basic", e);
         }
     }
 }

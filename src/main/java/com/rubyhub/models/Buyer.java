@@ -3,7 +3,6 @@ package com.rubyhub.models;
 import com.rubyhub.managers.BuyerManager;
 import org.bson.Document;
 import org.bson.types.Binary;
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
 import java.util.Date;
@@ -32,20 +31,16 @@ public class Buyer {
         try {
             this.address = doc.get(BuyerManager.FIELD_ADDRESS, org.bson.types.Binary.class);
         } catch (Exception e) {
+            this.address = null;
         }
-
-        try {
-            this.createdOn = doc.getDate(BuyerManager.FIELD_CREATED_ON);
-        } catch (Exception e) {
-        }
-        try {
-            this.updatedOn = doc.getDate(BuyerManager.FIELD_UPDATED_ON);
-        } catch (Exception e) {
-        }
+        this.createdOn = doc.getDate(BuyerManager.FIELD_CREATED_ON);
+        this.updatedOn = doc.getDate(BuyerManager.FIELD_UPDATED_ON);
         try {
             this.deletedOn = doc.getDate(BuyerManager.FIELD_DELETED_ON);
         } catch (Exception e) {
         }
+
+
     }
 
     public String getId() {
@@ -93,11 +88,11 @@ public class Buyer {
     }
 
 
-    public JSONArray getAddress() {
+    public JSONObject getAddress() {
         try {
-            return new JSONArray(new String(address.getData()));
+            return new JSONObject(new String(address.getData()));
         } catch (Exception e) {
-            return new JSONArray();
+            return new JSONObject();
         }
     }
 
