@@ -7,6 +7,8 @@ import com.rubyhub.utils.AppLogger;
 import com.rubyhub.utils.MongoPool;
 import org.bson.Document;
 
+import javax.ws.rs.PUT;
+
 public class Manager {
     protected MongoCollection<Document> studentCollection, buyerCollection;
 

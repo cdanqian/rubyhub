@@ -1,4 +1,4 @@
-package hw5.http.utils;
+package com.rubyhub.http.utils;
 
 import javax.ws.rs.HttpMethod;
 import java.lang.annotation.*;
