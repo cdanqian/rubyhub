@@ -1,6 +1,7 @@
 package com.rubyhub.managers;
 
 import com.rubyhub.models.Buyer;
+import com.rubyhub.utils.MongoPool;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -33,7 +34,7 @@ public class BuyerManager extends Manager {
                 .append(FIELD_EMAIL, email)
                 .append(FIELD_PW, pw)
                 .append(FIELD_PHONE, "")
-                .append(FIELD_CITY, "de")
+                .append(FIELD_CITY, "")
                 .append(FIELD_COUNTRY, "")
                 .append(FIELD_ADDRESS, "")
                 .append(FIELD_PAYMENT_ACCOUNT, "")
@@ -181,6 +182,7 @@ public class BuyerManager extends Manager {
 
     public void resetDB() {
         try {
+                MongoPool.getInstance().resetDB();
                 create("cdan", "aa", "abc@app.com", "123", "6502011111", "Fremont", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536") , "credit", "2109990000");
                 create("ddan", "bb", "cbc@app.com", "234", "6502011112", "Fremont", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536") , "credit", "2109990001");
                 create("qddn", "cc", "vbc@app.com", "123", "6502011113", "San Jose", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536"), "credit", "2109990002");

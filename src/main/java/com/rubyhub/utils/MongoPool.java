@@ -10,7 +10,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MongoPool {
-    public static String buyerCollectionName = "buyers", studentCollectionName = "students";
+    public static String buyerCollectionName = "buyers",
+                        studentCollectionName = "students",
+                        artworkCollectionName="artworks",artworkImageCollectionName="artworks.images";
     private static MongoPool mp;
     private static MongoDatabase db;
 

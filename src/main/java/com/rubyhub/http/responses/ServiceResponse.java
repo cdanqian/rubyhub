@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 public class ServiceResponse {
     public static Response response200(Object content) {
         try {
-            return Response.ok(new JSONObject().put("data", content), MediaType.APPLICATION_JSON).build();
+            return Response.ok(new JSONObject().put("data", content).put("success", true).put("httpStatusCode", 200), MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             return Response.status(400).entity("Error while response encoding").build();
         }
