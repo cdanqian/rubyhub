@@ -4,16 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rubyhub.http.responses.ServiceResponse;
 import com.rubyhub.managers.ArtworkManager;
-import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.rubyhub.models.Artwork;
+import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Path("/artworks")
 public class ArtworkInterface extends HttpInterface {
@@ -33,6 +35,34 @@ public class ArtworkInterface extends HttpInterface {
         }
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response artworkGetById(@PathParam("id") String id
+    ) {
+        try {
+            // todo: add file type check
+            return ServiceResponse.response200(ArtworkManager.getInstance().getArtworkById(id).castToJSON());
+        } catch (Exception e) {
+            return Response.status(404).entity(e.getMessage()).build();
+        }
+    }
+
+    @GET
+    @Path("/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response artworkGetAll(
+    ) {
+        try {
+            // todo: add file type check
+            List<Artwork> artworks = ArtworkManager.getInstance().getArtworks();
+            List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
+            return ServiceResponse.response200(new JSONArray(content));
+        } catch (Exception e) {
+            return Response.status(400).entity(e.getMessage()).build();
+        }
+    }
+
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
@@ -49,24 +79,24 @@ public class ArtworkInterface extends HttpInterface {
             );
             return ServiceResponse.response200(new JSONObject().put("id", id));
         } catch (Exception e) {
-            return Response.status(404).entity("Service is not available now, please try later").build();
+            return Response.status(400).entity("Service is not available now, please try later").build();
         }
     }
 
     @POST
-    @Path("/{id}")
+    @Path("/image/{id}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkImagePost(@PathParam("id") String id
-//                                     @FormParam("File") FileInputStream image
-//                                     @FormParam("image") FormDataContentDisposition cdh
+    public Response artworkImagePost(@PathParam("id") String id,
+                                     @FormDataParam("image") InputStream image
     ) {
         try {
-//            System.out.println(form.get("image"));
-//            ArtworkManager.getInstance().uploadArtworkImage(id,  image);
-            return ServiceResponse.response200(new JSONObject().append("id", id));
+            // todo: add file type check
+            ArtworkManager.getInstance().uploadArtworkImage(id, image);
+            return ServiceResponse.response200(new JSONObject().put("id", "id"));
         } catch (Exception e) {
-            return Response.status(404).entity("Service is not available now, please try later").build();
+            return Response.status(400).entity(e.getMessage()).build();
         }
     }
+
 }

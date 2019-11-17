@@ -17,7 +17,7 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class Manager {
     public static String FIELD_DELETED = "deleted", FIELD_CREATED_ON = "createdOn", FIELD_UPDATED_ON = "updatedOn", FIELD_DELETED_ON = "deletedOn";
-    private static Bson FILTER_NOT_DELETED = eq(FIELD_DELETED, false);
+    protected static Bson FILTER_NOT_DELETED = eq(FIELD_DELETED, false);
     protected MongoCollection<Document> studentCollection, buyerCollection, artworkCollection, artworkImageCollection;
 
     public Manager() {
