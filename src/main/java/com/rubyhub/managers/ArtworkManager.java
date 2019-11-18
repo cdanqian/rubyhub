@@ -97,7 +97,6 @@ public class ArtworkManager extends Manager {
             docs.forEach(doc -> {
                 String id = doc.getString(FIELD_ID);
                 Artwork artwork = new Artwork(doc);
-//                artwork.setImage(this.artworkImageCollection.find(eq(FIELD_ID, id)).first().get(FIELD_IMAGE_CONTENT, Binary.class));
                 artworks.add(artwork);
             });
             return artworks;
