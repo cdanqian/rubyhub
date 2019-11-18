@@ -6,7 +6,31 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="543b9e14-48ca-4e94-8106-96c0ef400f82" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="543b9e14-48ca-4e94-8106-96c0ef400f82" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ArtworkInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ArtworkInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/responses/ServiceResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/responses/ServiceResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/BuyerManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/BuyerManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Artwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Artwork.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ArtworkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ArtworkInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/responses/ServiceResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/BuyerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/BuyerManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" afterDir="false" />
+    </list>
+>>>>>>> 6badd8ca886545c06a8fb04f9779a55337e8887c
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,8 +259,12 @@
       <workItem from="1572229606020" duration="13398000" />
       <workItem from="1572229606020" duration="5514000" />
       <workItem from="1572241392399" duration="51000" />
+<<<<<<< HEAD
       <workItem from="1573952763073" duration="16465000" />
       <workItem from="1574051026641" duration="659000" />
+=======
+      <workItem from="1573952763073" duration="28880000" />
+>>>>>>> 6badd8ca886545c06a8fb04f9779a55337e8887c
     </task>
     <servers />
   </component>

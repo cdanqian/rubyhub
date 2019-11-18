@@ -3,10 +3,12 @@ package com.rubyhub.http.interfaces;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rubyhub.http.responses.ServiceResponse;
+import com.rubyhub.http.utils.PATCH;
 import com.rubyhub.managers.ArtworkManager;
 import com.rubyhub.models.Artwork;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
@@ -36,15 +38,63 @@ public class ArtworkInterface extends HttpInterface {
     }
 
     @GET
+    @Path("/reset")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response artworkRootReset() {
+        try {
+            ArtworkManager.getInstance().resetData();
+            return ServiceResponse.response200("Artwork resource has been reset");
+        } catch (Exception e) {
+            return Response.status(404).entity("Service is not available now, please try later").build();
+        }
+    }
+
+    @GET
     @Path("/{id}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response artworkGetById(@PathParam("id") String id
     ) {
         try {
             // todo: add file type check
-            return ServiceResponse.response200(ArtworkManager.getInstance().getArtworkById(id).castToJSON());
+            Artwork artwork = ArtworkManager.getInstance().getArtworkById(id);
+            if(artwork == null) return ServiceResponse.response200(new JSONObject());
+            return ServiceResponse.response200(artwork.castToJSON());
         } catch (Exception e) {
             return Response.status(404).entity(e.getMessage()).build();
+        }
+    }
+
+    @PATCH
+    @Path("/{id}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response artworkPatchById(Object request, @PathParam("id") String id) {
+        try {
+            JSONObject json = new JSONObject(ow.writeValueAsString(request));
+            Boolean updated = ArtworkManager.getInstance().updateArtwork(
+                    id,
+                    json.getString("name"),
+                    json.getString("description"),
+                    json.getJSONArray("styles")
+            );
+            if (!updated) {
+                return ServiceResponse.response400("ID is not valid");
+            }
+            return ServiceResponse.response200("Updated");
+        } catch (Exception e) {
+            throw handleException("PATCH /artwork/id", e);
+        }
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response artworkDELETE(@PathParam("id") String id) {
+        try {
+            ArtworkManager.getInstance().deleteArtwork(id);
+            return ServiceResponse.response200("deleted");
+        } catch (Exception e) {
+            throw handleException("PATCH /artwork/id", e);
         }
     }
 
@@ -91,12 +141,11 @@ public class ArtworkInterface extends HttpInterface {
                                      @FormDataParam("image") InputStream image
     ) {
         try {
-            // todo: add file type check
-            ArtworkManager.getInstance().uploadArtworkImage(id, image);
-            return ServiceResponse.response200(new JSONObject().put("id", "id"));
+            //todo: get file type from FormDataContentDisposition
+            ArtworkManager.getInstance().uploadArtworkImage(id, image, "jpg");
+            return ServiceResponse.response200("Uploaded");
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
     }
-
 }
