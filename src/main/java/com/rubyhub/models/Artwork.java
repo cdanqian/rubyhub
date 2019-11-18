@@ -2,6 +2,8 @@ package com.rubyhub.models;
 
 import com.rubyhub.managers.ArtworkManager;
 import com.rubyhub.managers.BuyerManager;
+import com.rubyhub.managers.Manager;
+import com.rubyhub.utils.AppLogger;
 import org.bson.Document;
 import org.bson.types.Binary;
 import org.codehaus.jettison.json.JSONArray;
@@ -30,14 +32,16 @@ public class Artwork {
         this.deleted = doc.getBoolean(BuyerManager.FIELD_DELETED);
         this.createdOn = doc.getDate(BuyerManager.FIELD_CREATED_ON);
         this.updatedOn = doc.getDate(BuyerManager.FIELD_UPDATED_ON);
+        this.image = "";
         try {
             this.deletedOn = doc.getDate(BuyerManager.FIELD_DELETED_ON);
         } catch (Exception e) {
+            AppLogger.error("Artwork model - deleted on",e);
         }
     }
 
-    public void setImage(Binary image) {
-        this.image = new String(image.getData());
+    public void setImage(String  id, String type) {
+        this.image = "/artworks/image/" + id + "." + type;
     }
 
     public JSONObject castToJSON() {
@@ -50,11 +54,11 @@ public class Artwork {
                     .put(ArtworkManager.FIELD_STYLES, new JSONArray(styles))
                     .put(ArtworkManager.FIELD_STUDENT, student)
                     .put(ArtworkManager.FIELD_PASS_CHECK, passedcheck)
-                    .put(ArtworkManager.FIELD_IMAGE_CONTENT, "")
-                    .put(BuyerManager.FIELD_DELETED, deleted)
-                    .put(BuyerManager.FIELD_CREATED_ON, createdOn)
-                    .put(BuyerManager.FIELD_UPDATED_ON, updatedOn)
-                    .put(BuyerManager.FIELD_DELETED_ON, deletedOn);
+                    .put("image", image)
+                    .put(Manager.FIELD_DELETED, deleted)
+                    .put(Manager.FIELD_CREATED_ON, createdOn)
+                    .put(Manager.FIELD_UPDATED_ON, updatedOn)
+                    .put(Manager.FIELD_DELETED_ON, deletedOn);
             return js;
         } catch (Exception e) {
             return null;

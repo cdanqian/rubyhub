@@ -1,6 +1,7 @@
 package com.rubyhub.managers;
 
 import com.rubyhub.models.Buyer;
+import com.rubyhub.utils.AppLogger;
 import com.rubyhub.utils.MongoPool;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -182,7 +183,7 @@ public class BuyerManager extends Manager {
 
     public void resetDB() {
         try {
-                MongoPool.getInstance().resetDB();
+                this.buyerCollection.drop();
                 create("cdan", "aa", "abc@app.com", "123", "6502011111", "Fremont", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536") , "credit", "2109990000");
                 create("ddan", "bb", "cbc@app.com", "234", "6502011112", "Fremont", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536") , "credit", "2109990001");
                 create("qddn", "cc", "vbc@app.com", "123", "6502011113", "San Jose", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536"), "credit", "2109990002");
@@ -191,7 +192,7 @@ public class BuyerManager extends Manager {
                 create("rdan", "rr", "mbc@app.com", "123", "6502011116", "San Jose", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536"), "credit", "2109990005");
                 create("ddan", "tt", "qbc@app.com", "123", "6502011117", "San Jose", "US", new Document().append("add1", "add1").append("add2", "add2").append("zipcode", "94536"), "credit", "2109990006");
         } catch (Exception e) {
-            System.out.println(e.getMessage().toString());
+            AppLogger.error("Buyer manager - reset db", e);
         }
     }
 
