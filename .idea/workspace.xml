@@ -6,6 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="543b9e14-48ca-4e94-8106-96c0ef400f82" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" afterDir="false" />
@@ -239,7 +240,10 @@
       <workItem from="1572229606020" duration="13398000" />
       <workItem from="1572229606020" duration="5514000" />
       <workItem from="1572241392399" duration="51000" />
-      <workItem from="1573952763073" duration="29149000" />
+
+      <workItem from="1573952763073" duration="16465000" />
+      <workItem from="1574051026641" duration="659000" />
+      <workItem from="1573952763073" duration="28880000" />
     </task>
     <servers />
   </component>
