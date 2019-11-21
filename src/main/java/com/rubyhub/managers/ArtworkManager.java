@@ -95,12 +95,12 @@ public class ArtworkManager extends Manager {
 
     }
 
-    public File getArtworkImageById(String id) {
+    public byte[] getArtworkImageById(String id) {
         Document doc = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
-        Binary content = doc.get("congent", Binary.class);
+        Binary content = doc.get(FIELD_IMAGE_CONTENT, Binary.class);
         Artwork artwork = new Artwork(doc);
         artwork.setImage(id, "jpg");
-        return new File("");
+        return content.getData();
     }
 
     public Boolean inspectImageContent() {

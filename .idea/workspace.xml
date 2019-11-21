@@ -6,11 +6,57 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-
     <list default="true" id="543b9e14-48ca-4e94-8106-96c0ef400f82" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/AppApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/AppApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ArtworkInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ArtworkInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/RubyhubInterfaces.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/RubyhubInterfaces.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/exceptions/AppBadRequestException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/exceptions/AppException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/exceptions/AppInternalServerException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/exceptions/AppNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/exceptions/AppUnauthorizedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/AppApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/exceptions/ErrorModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/exceptions/HttpBadRequestException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/exceptions/HttpInternalServerException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/exceptions/HttpNotFoundException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/exceptions/HttpUnauthorizedException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/interfaces/BookInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/interfaces/BorrowerInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/interfaces/HttpInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/interfaces/LMSMainInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/http/responses/AppResponse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/managers/BookManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/managers/BorrowerManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/managers/LMSManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/managers/Manager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/models/Book.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/models/Borrower.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/utils/AppLogger$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/utils/AppLogger.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/utils/Config.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/com/rubyhub/utils/MongoPool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/classes/hw5/http/utils/PATCH.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/rubyhub_main_war_exploded/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/AppApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/AppApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ArtworkInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ArtworkInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/RubyhubInterfaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/RubyhubInterfaces.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,8 +169,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.26">
-    <configuration name="rubyhub [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9">
+    <configuration name="rubyhub [build]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -143,7 +189,8 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Tomcat 9.0.26" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.26" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+    <configuration name="Tomcat 9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.26" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="BROWSER_ID" value="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Gradle : cmu.app.project : rubyhub-1.0-SNAPSHOT.war">
@@ -153,7 +200,7 @@
         </artifact>
       </deployment>
       <server-settings>
-        <option name="BASE_DIRECTORY_NAME" value="Unnamed_rubyhub" />
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_rubyhub_3" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
       <predefined_log_file enabled="true" id="Tomcat Catalina" />
@@ -161,7 +208,7 @@
       <predefined_log_file id="Tomcat Host Manager" />
       <predefined_log_file id="Tomcat Localhost Access" />
       <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="63010" />
+        <option name="DEBUG_PORT" value="64402" />
       </RunnerSettings>
       <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
         <option name="USE_ENV_VARIABLES" value="true" />
@@ -217,13 +264,8 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.rubyhub [build]" />
-      <item itemvalue="Tomcat Server.Tomcat 9.0.26" />
+      <item itemvalue="Tomcat Server.Tomcat 9" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.rubyhub [build]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -240,10 +282,12 @@
       <workItem from="1572229606020" duration="13398000" />
       <workItem from="1572229606020" duration="5514000" />
       <workItem from="1572241392399" duration="51000" />
-
       <workItem from="1573952763073" duration="16465000" />
       <workItem from="1574051026641" duration="659000" />
       <workItem from="1573952763073" duration="28880000" />
+      <workItem from="1574135461457" duration="155000" />
+      <workItem from="1574140821569" duration="11576000" />
+      <workItem from="1574271548932" duration="6863000" />
     </task>
     <servers />
   </component>

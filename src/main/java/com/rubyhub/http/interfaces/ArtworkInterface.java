@@ -13,8 +13,9 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -57,7 +58,7 @@ public class ArtworkInterface extends HttpInterface {
         try {
             // todo: add file type check
             Artwork artwork = ArtworkManager.getInstance().getArtworkById(id);
-            if(artwork == null) return ServiceResponse.response200(new JSONObject());
+            if (artwork == null) return ServiceResponse.response200(new JSONObject());
             return ServiceResponse.response200(artwork.castToJSON());
         } catch (Exception e) {
             return Response.status(404).entity(e.getMessage()).build();
@@ -137,15 +138,31 @@ public class ArtworkInterface extends HttpInterface {
     @Path("/image/{id}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkImagePost(@PathParam("id") String id,
-                                     @FormDataParam("image") InputStream image
-    ) {
+    public Response artworkImagePost(
+            @PathParam("id") String id,
+            @FormDataParam("image") InputStream image,
+            @FormDataParam("image") FormDataContentDisposition fdc
+                                     ) {
         try {
             //todo: get file type from FormDataContentDisposition
+            System.out.println(fdc.getFileName());
             ArtworkManager.getInstance().uploadArtworkImage(id, image, "jpg");
             return ServiceResponse.response200("Uploaded");
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }
+    }
+
+    @GET
+    @Path("/image/{filename}")
+    @Produces("image/jpeg")
+    public Response artworkImageGet(@PathParam("filename") String filename) {
+        try {
+            byte[] image = ArtworkManager.getInstance().getArtworkImageById(filename);
+            return Response.ok(image).build();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

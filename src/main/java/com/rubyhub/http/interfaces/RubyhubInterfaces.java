@@ -2,6 +2,7 @@ package com.rubyhub.http.interfaces;
 
 import com.rubyhub.http.responses.ServiceResponse;
 import org.codehaus.jettison.json.JSONObject;
+import org.json.HTTP;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,7 +12,7 @@ import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
 
 @Path("")
-public class RubyhubInterfaces {
+public class RubyhubInterfaces extends HttpInterface {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public Response applicationRoot() {
