@@ -13,10 +13,11 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
-import java.io.*;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -142,11 +143,11 @@ public class ArtworkInterface extends HttpInterface {
             @PathParam("id") String id,
             @FormDataParam("image") InputStream image,
             @FormDataParam("image") FormDataContentDisposition fdc
-                                     ) {
+    ) {
         try {
             //todo: get file type from FormDataContentDisposition
-            System.out.println(fdc.getFileName());
-            ArtworkManager.getInstance().uploadArtworkImage(id, image, "jpg");
+            String ftype = fdc.getFileName().split("\\.")[1];
+            ArtworkManager.getInstance().uploadArtworkImage(id, image, ftype);
             return ServiceResponse.response200("Uploaded");
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
@@ -155,11 +156,12 @@ public class ArtworkInterface extends HttpInterface {
 
     @GET
     @Path("/image/{filename}")
-    @Produces("image/jpeg")
+    @Produces({"image/png", "image/jpeg"})
     public Response artworkImageGet(@PathParam("filename") String filename) {
         try {
-            byte[] image = ArtworkManager.getInstance().getArtworkImageById(filename);
-            return Response.ok(image).build();
+            String id = filename.split("\\.")[0];
+            Map image = ArtworkManager.getInstance().getArtworkImageById(id);
+            return Response.ok(image.get("content")).build();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

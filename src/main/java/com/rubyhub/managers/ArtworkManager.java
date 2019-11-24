@@ -11,9 +11,7 @@ import org.codehaus.jettison.json.JSONArray;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
@@ -24,7 +22,7 @@ public class ArtworkManager extends Manager {
             FIELD_NAME = "name", FIELD_DESC = "description", FIELD_PRICE = "price", FIELD_SIZE = "sizes", FIELD_STYLES = "styles",
             FIELD_SOLDOUT = "soldout", FIELD_LIKES = "likes", FIELD_PASS_CHECK = "passedcheck", FIELD_STUDENT = "student", FIELD_FTYPE = "type";
 
-    public static String FIELD_IMAGE_CONTENT = "content";
+    public static String FIELD_IMAGE_CONTENT = "content",FIELD_IMAGE_TYPE = "type";
 
     public static ArtworkManager getInstance() {
         if (_self == null) {
@@ -95,12 +93,12 @@ public class ArtworkManager extends Manager {
 
     }
 
-    public byte[] getArtworkImageById(String id) {
+    public Map getArtworkImageById(String id) {
+        Map<String, Object> image = new HashMap<>();
         Document doc = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
-        Binary content = doc.get(FIELD_IMAGE_CONTENT, Binary.class);
-        Artwork artwork = new Artwork(doc);
-        artwork.setImage(id, "jpg");
-        return content.getData();
+        image.put("type",doc.getString(FIELD_IMAGE_TYPE));
+        image.put("content",doc.get(FIELD_IMAGE_CONTENT, Binary.class).getData());
+        return image;
     }
 
     public Boolean inspectImageContent() {
@@ -115,7 +113,8 @@ public class ArtworkManager extends Manager {
 
         Artwork artwork = new Artwork(doc);
         if (this.artworkImageCollection.countDocuments(eq(FIELD_ID, id)) != 0) {
-            artwork.setImage(id, "jpg");
+            Document image = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
+            artwork.setImage(id, image.getString("type"));
         }
         return artwork;
     }
@@ -137,7 +136,8 @@ public class ArtworkManager extends Manager {
                 String id = doc.getString(FIELD_ID);
                 Artwork artwork = new Artwork(doc);
                 if (this.artworkImageCollection.countDocuments(eq(FIELD_ID, id)) != 0) {
-                    artwork.setImage(id, "jpg");
+                    Document image = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
+                    artwork.setImage(id, image.getString("type"));
                 }
                 artworks.add(artwork);
             });
