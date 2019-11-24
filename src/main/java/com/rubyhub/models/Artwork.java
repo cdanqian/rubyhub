@@ -67,6 +67,18 @@ public class Artwork {
         this.image = "/artworks/image/" + id + "." + type;
     }
 
+    public String getImage(){
+        return image;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public double getPrice(){
+        return price;
+    }
+
     public JSONObject castToJSON() {
         try {
             JSONObject js = new JSONObject().put("id", id)

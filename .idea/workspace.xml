@@ -13,21 +13,17 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.2.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/StudentHttpInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/StudentHttpInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ShoppingCartHttpInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/http/interfaces/ShoppingCartHttpInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ArtworkManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/StudentManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/StudentManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ShoppingCartManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/managers/ShoppingCartManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Artwork.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Artwork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/rubyhub/models/Student.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/rubyhub-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/StudentHttpInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/StudentHttpInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ShoppingCartHttpInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/http/interfaces/ShoppingCartHttpInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ArtworkManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/StudentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/StudentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ShoppingCartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/managers/ShoppingCartManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Artwork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/rubyhub/models/Student.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -258,7 +254,7 @@
       <workItem from="1572229606020" duration="5514000" />
       <workItem from="1572241392399" duration="51000" />
       <workItem from="1573952763073" duration="28880000" />
-      <workItem from="1574218320574" duration="39532000" />
+      <workItem from="1574218320574" duration="43970000" />
     </task>
     <servers />
   </component>

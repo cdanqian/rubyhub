@@ -10,6 +10,7 @@ import com.rubyhub.managers.ArtworkManager;
 import com.rubyhub.managers.ShoppingCartManager;
 import com.rubyhub.managers.StudentManager;
 import com.rubyhub.models.Artwork;
+import com.rubyhub.models.CartItem;
 import com.rubyhub.models.ShoppingCart;
 import com.rubyhub.models.Student;
 import org.codehaus.jettison.json.JSONArray;
@@ -82,7 +83,7 @@ public class ShoppingCartHttpInterface extends HttpInterface{
     @Produces({MediaType.APPLICATION_JSON})
     public AppResponse shoppingCartGetOne( @PathParam("cartId") String cartId) {
         try {
-            List<String> artworks = ShoppingCartManager.getInstance().getCartById(cartId);
+            List<CartItem> artworks = ShoppingCartManager.getInstance().getCartById(cartId);
             return new AppResponse(artworks);
         } catch (Exception e) {
             throw new HttpBadRequestException(0, "Problem with getting shoppingCarts");

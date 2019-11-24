@@ -142,7 +142,7 @@ public class ArtworkManager extends Manager {
 
     public File getArtworkImageById(String id) {
         Document doc = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
-        Binary content = doc.get("congent", Binary.class);
+        Binary content = doc.get("content", Binary.class);
 //        File image = new File(content.getData())
         Artwork artwork = new Artwork(doc);
         artwork.setImage(id, "jpg");
