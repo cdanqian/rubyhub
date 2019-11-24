@@ -9,6 +9,8 @@ import org.bson.types.Binary;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Artwork {
     private Boolean passedcheck, deleted;
     private Date createdOn, updatedOn, deletedOn;
     private String image;
+    private int likes;
 
     public Artwork(Document doc) {
         this.id = doc.get(ArtworkManager.FIELD_ID).toString();
@@ -32,6 +35,7 @@ public class Artwork {
         this.deleted = doc.getBoolean(BuyerManager.FIELD_DELETED);
         this.createdOn = doc.getDate(BuyerManager.FIELD_CREATED_ON);
         this.updatedOn = doc.getDate(BuyerManager.FIELD_UPDATED_ON);
+        this.likes = doc.getInteger(ArtworkManager.FIELD_LIKES);
         this.image = "";
         try {
             this.deletedOn = doc.getDate(BuyerManager.FIELD_DELETED_ON);
@@ -40,8 +44,39 @@ public class Artwork {
         }
     }
 
+    public int getLikes(){
+        return likes;
+    }
+
+    public void setLikes(int likes){
+        this.likes = likes;
+    }
+
+    public List<String> setSize(String size){
+        sizes = new ArrayList<String>();
+        sizes.add(size);
+        return sizes;
+    }
+
+    public List<String> setSizeBack(){
+        sizes = Arrays.asList("S","M","L");
+        return sizes;
+    }
+
     public void setImage(String  id, String type) {
         this.image = "/artworks/image/" + id + "." + type;
+    }
+
+    public String getImage(){
+        return image;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public double getPrice(){
+        return price;
     }
 
     public JSONObject castToJSON() {
@@ -54,6 +89,7 @@ public class Artwork {
                     .put(ArtworkManager.FIELD_STYLES, new JSONArray(styles))
                     .put(ArtworkManager.FIELD_STUDENT, student)
                     .put(ArtworkManager.FIELD_PASS_CHECK, passedcheck)
+                    .put(ArtworkManager.FIELD_LIKES, likes)
                     .put("image", image)
                     .put(Manager.FIELD_DELETED, deleted)
                     .put(Manager.FIELD_CREATED_ON, createdOn)

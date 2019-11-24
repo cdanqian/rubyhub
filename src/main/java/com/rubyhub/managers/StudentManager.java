@@ -48,7 +48,6 @@ public class StudentManager extends Manager{
     public void createStudent(Student student) throws AppException {
 
         try{
-            JSONObject json = new JSONObject(student);
 
             Document newDoc = new Document()
                     .append("id", student.getId())

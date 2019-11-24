@@ -1,13 +1,20 @@
 package com.rubyhub.managers;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.model.Filters;
+import com.rubyhub.exceptions.AppException;
+import com.rubyhub.exceptions.AppInternalServerException;
 import com.rubyhub.models.Artwork;
 import com.rubyhub.utils.AppLogger;
 import org.apache.commons.io.IOUtils;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.codehaus.jettison.json.JSONArray;
 
+import javax.print.Doc;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,6 +68,44 @@ public class ArtworkManager extends Manager {
         return true;
     }
 
+    public void updateSize(String id, String size){
+        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
+        Artwork artwork = new Artwork(doc);
+        List<String> newSizes = artwork.setSize(size);
+        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
+                new Document("$set", new Document(FIELD_SIZE, newSizes)))
+        ;
+    }
+
+    public void updateSizeBack(String id){
+        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
+        Artwork artwork = new Artwork(doc);
+        List<String> newSizes = artwork.setSizeBack();
+        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
+                new Document("$set", new Document(FIELD_SIZE, newSizes)))
+        ;
+    }
+
+    public boolean markArtworkLikes(String id) {
+        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
+        Artwork artwork = new Artwork(doc);
+        int likes = artwork.getLikes() + 1;
+        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
+                new Document("$set", new Document(FIELD_LIKES, likes)))
+        ;
+        return true;
+    }
+
+    public boolean unMarkArtworkLikes(String id) {
+        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
+        Artwork artwork = new Artwork(doc);
+        int likes = artwork.getLikes() - 1;
+        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
+                new Document("$set", new Document(FIELD_LIKES, likes)))
+        ;
+        return true;
+    }
+
     public Boolean uploadArtworkImage(String id, InputStream image, String type) {
         String source = "";
         if (!inspectImageContent()) return false;
@@ -108,8 +153,8 @@ public class ArtworkManager extends Manager {
 
 
     public Artwork getArtworkById(String id) {
-        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id),FILTER_NOT_DELETED)).first();
-        if(doc == null) return null;
+        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
+        if (doc == null) return null;
 
         Artwork artwork = new Artwork(doc);
         if (this.artworkImageCollection.countDocuments(eq(FIELD_ID, id)) != 0) {
@@ -155,5 +200,58 @@ public class ArtworkManager extends Manager {
         createArtwork("artwork 1", "this is artwork 1", 123.3, sizes, styles, "owner 1");
         createArtwork("artwork 2", "this is artwork 2", 223.3, sizes, styles, "owner 2");
         createArtwork("artwork 3", "this is artwork 3", 323.3, sizes, styles, "owner 3");
+    }
+
+    public ArrayList<Artwork> getArtworkListSortedByLikes(String sortby) throws AppException {
+        try {
+            ArrayList<Artwork> artworkList = new ArrayList<>();
+            Document sort = null;
+            switch (sortby) {
+                case "likesAsc":
+                    sort = new Document(FIELD_LIKES, 1);
+                    break;
+                case "likesDesc":
+                    sort = new Document(FIELD_LIKES, -1);
+                    break;
+            }
+            Iterable<Document> docs = this.artworkCollection.find(FILTER_NOT_DELETED).sort(sort);
+            docs.forEach(doc -> artworkList.add(new Artwork(doc)));
+            return new ArrayList<>(artworkList);
+        } catch (Exception e) {
+            throw handleException("Get Artwork List", e);
+        }
+    }
+
+    public ArrayList<Artwork> getArtworkListSortedByTime(String sortby) throws AppException {
+        try {
+            ArrayList<Artwork> artworkList = new ArrayList<>();
+            Document sort = null;
+            switch (sortby) {
+                case "timeAsc":
+                    sort = new Document(FIELD_CREATED_ON, 1);
+                    break;
+                case "timeDesc":
+                    sort = new Document(FIELD_CREATED_ON, -1);
+                    break;
+            }
+            Iterable<Document> docs = this.artworkCollection.find(FILTER_NOT_DELETED).sort(sort);
+            docs.forEach(doc -> artworkList.add(new Artwork(doc)));
+            return new ArrayList<>(artworkList);
+        } catch (Exception e) {
+            throw handleException("Get Artwork List", e);
+        }
+    }
+
+    public ArrayList<Artwork> getAllArtworksFilteredByOwners(String student) {
+        ArrayList<Artwork> artworks = new ArrayList<>();
+        Bson filter = null;
+        filter = Filters.eq(FIELD_STUDENT, student);
+        Iterable<Document> docs = this.artworkCollection.find(filter);
+        if (docs != null) {
+            docs.forEach(doc -> artworks.add(new Artwork(doc)));
+            return new ArrayList<>(artworks);
+        } else {
+            return null;
+        }
     }
 }
