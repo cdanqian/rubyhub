@@ -6,6 +6,7 @@ import com.rubyhub.exceptions.AppException;
 import com.rubyhub.exceptions.AppInternalServerException;
 import com.rubyhub.models.Artwork;
 import com.rubyhub.models.CartItem;
+import com.rubyhub.models.Pricing;
 import com.rubyhub.models.ShoppingCart;
 import com.rubyhub.utils.MongoPool;
 import org.bson.Document;
@@ -140,5 +141,17 @@ public class ShoppingCartManager extends Manager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean checkout(String cartId) throws AppException {
+        ArrayList<CartItem> items = this.getCartById(cartId);
+        double price = 0.0;
+        for(CartItem item : items){
+             price += PricingManager.getInstance().getPrice(item.getSize()).getTotal();
+        }
+        if(PaymentManager.getInstance().doPayment(price))
+            return true;
+        else
+            return false;
     }
 }

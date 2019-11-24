@@ -139,4 +139,22 @@ public class ShoppingCartHttpInterface extends HttpInterface{
         }
 
     }
+
+    @POST
+    @Path("/{cartId}/checkout")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public AppResponse checkout(@PathParam("cartId") String cartId){
+
+        try{
+            if(ShoppingCartManager.getInstance().checkout(cartId)) {
+                ShoppingCartManager.getInstance().deleteAllArtworks(cartId);
+                return new AppResponse("Checkout Successful");
+            }
+            else
+                return new AppResponse("Failed to checkout");
+        }catch (Exception e){
+            throw handleException("Checkout cartId/artworks", e);
+        }
+    }
 }

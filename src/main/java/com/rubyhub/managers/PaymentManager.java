@@ -13,8 +13,8 @@ public class PaymentManager extends Manager {
         return _self;
     }
 
-    public Boolean doPayment(Pricing price) {
+    public Boolean doPayment(double price) {
         // todo: include payment service
-        return price.getTotal() != 0;
+        return price != 0;
     }
 }

@@ -12,4 +12,8 @@ public class CartItem {
         this.image = image;
         this.size = size;
     }
+
+    public String getSize(){
+        return size;
+    }
 }
