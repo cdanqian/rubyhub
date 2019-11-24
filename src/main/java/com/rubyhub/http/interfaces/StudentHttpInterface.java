@@ -42,7 +42,9 @@ public class StudentHttpInterface extends HttpInterface{
                     json.getString("id"),
                     json.getString("firstName"),
                     json.getString("lastName"),
-                    json.getString("bankAccount")
+                    json.getString("bankAccount"),
+                    json.getString("email"),
+                    json.getString("password")
             );
             StudentManager.getInstance().createStudent(newStudent);
             return new AppResponse("Insert Successful");
@@ -58,7 +60,7 @@ public class StudentHttpInterface extends HttpInterface{
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public AppResponse getStudents(@Context HttpHeaders headers, @QueryParam("filter") String filter,@QueryParam("sortby") String sortby, @QueryParam("offset") Integer offset,
-                                @QueryParam("count") Integer count){
+                                   @QueryParam("count") Integer count){
         try{
             AppLogger.info("Got an API call");
             ArrayList<Student> students = null;
@@ -108,7 +110,7 @@ public class StudentHttpInterface extends HttpInterface{
     @Path("/{studentId}")
     @Consumes({ MediaType.APPLICATION_JSON})
     @Produces({ MediaType.APPLICATION_JSON})
-    public AppResponse patchStudent(Object request, @PathParam("studentId") String studentId){
+    public AppResponse patchStudent(@Context HttpHeaders headers, Object request, @PathParam("studentId") String studentId){
 
         JSONObject json = null;
 
@@ -118,10 +120,12 @@ public class StudentHttpInterface extends HttpInterface{
                     studentId,
                     json.getString("firstName"),
                     json.getString("lastName"),
-                    json.getString("bankAccount")
+                    json.getString("bankAccount"),
+                    json.getString("email"),
+                    json.getString("password")
             );
 
-            StudentManager.getInstance().updateStudent(student);
+            StudentManager.getInstance().updateStudent(headers, student);
 
         }catch (Exception e){
             throw handleException("PATCH students/{studentId}", e);
