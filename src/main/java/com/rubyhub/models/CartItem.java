@@ -16,4 +16,5 @@ public class CartItem {
     public String getSize(){
         return size;
     }
+    public String getId(){return id;}
 }

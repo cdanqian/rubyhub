@@ -9,10 +9,7 @@ import com.rubyhub.models.Pricing;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,14 +30,14 @@ public class PricingInterface extends HttpInterface{
     }
 
    @POST
-   @Path("{/id}")
+   @Path("/{id}")
    @Produces({MediaType.APPLICATION_JSON})
-    public Response pricingGet(Object request){
+    public Response pricingGet(Object request, @PathParam("id") String id){
        try {
            JSONObject json = new JSONObject(ow.writeValueAsString(request));
            String size = json.getString("size");
-           Pricing price = PricingManager.getInstance().getPrice("dummy");
-           return ServiceResponse.response200(price);
+           Pricing price = PricingManager.getInstance().getPrice(id,size );
+           return ServiceResponse.response200(price.castToJSON());
        } catch (JSONException e) {
            e.printStackTrace();
        } catch (JsonProcessingException e) {

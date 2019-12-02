@@ -1,17 +1,34 @@
 package com.rubyhub.models;
 
+import org.codehaus.jettison.json.JSONObject;
+
 public class Pricing {
 
-    private Double total, originalPrice, charging4Size, bonusOfLikes, tax;
+    private Double total, originalPrice, charge4Size, bonusOfLikes, tax;
 
-    public Pricing(Double originalPrice, Double charging4Size, Double bonusOfLikes, Double tax) {
+    public Pricing(Double originalPrice, Double charge4Size, Double bonusOfLikes, Double tax) {
         this.bonusOfLikes = bonusOfLikes;
-        this.charging4Size = charging4Size;
+        this.charge4Size = charge4Size;
         this.originalPrice = originalPrice;
-        this.total = bonusOfLikes + charging4Size + originalPrice + tax;
+        this.tax = tax;
+        this.total = bonusOfLikes + charge4Size + originalPrice + tax;
     }
 
-    public  Double getTotal(){
+    public Double getTotal() {
         return this.getTotal();
+    }
+
+    public JSONObject castToJSON() {
+        try {
+            JSONObject js = new JSONObject()
+                    .put("total", total)
+                    .put("detail", new JSONObject().put("originalPrice", originalPrice)
+                            .put("charge4size", charge4Size)
+                            .put("bonusOfLikes", bonusOfLikes)
+                            .put("tax", tax));
+            return js;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

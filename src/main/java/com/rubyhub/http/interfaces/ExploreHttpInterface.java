@@ -2,8 +2,6 @@ package com.rubyhub.http.interfaces;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.rubyhub.http.exceptions.HttpBadRequestException;
-import com.rubyhub.http.responses.AppResponse;
 import com.rubyhub.http.responses.ServiceResponse;
 import com.rubyhub.http.utils.PATCH;
 import com.rubyhub.managers.ArtworkManager;
@@ -52,10 +50,17 @@ public class ExploreHttpInterface extends HttpInterface {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkGetAll() {
+    public Response artworkGetAll(@QueryParam("q") String query) {
+        List<Artwork> artworks = new ArrayList<Artwork>();
+        System.out.println(query);
         try {
-            // todo: add file type check
-            List<Artwork> artworks = ArtworkManager.getInstance().getArtworks();
+            if (query != null) {
+
+                artworks = ArtworkManager.getInstance().searchArtworks(query);
+            } else {
+                artworks = ArtworkManager.getInstance().getArtworks();
+            }
+
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
         } catch (Exception e) {
@@ -66,7 +71,7 @@ public class ExploreHttpInterface extends HttpInterface {
     @PATCH
     @Path("/{id}/likes")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkLikesPatchById( @PathParam("id") String id) {
+    public Response artworkLikesPatchById(@PathParam("id") String id) {
         try {
             Boolean updated = ArtworkManager.getInstance().markArtworkLikes(id);
             if (!updated) {
@@ -81,7 +86,7 @@ public class ExploreHttpInterface extends HttpInterface {
     @PATCH
     @Path("/{id}/unlikes")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkCancelLikesById( @PathParam("id") String id) {
+    public Response artworkCancelLikesById(@PathParam("id") String id) {
         try {
             Boolean updated = ArtworkManager.getInstance().unMarkArtworkLikes(id);
             if (!updated) {
@@ -97,17 +102,17 @@ public class ExploreHttpInterface extends HttpInterface {
     @GET
     @Path("/sortlikes")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getArtworksSortedByLikes( @QueryParam("sortby") String sortby){
-        try{
+    public Response getArtworksSortedByLikes(@QueryParam("sortby") String sortby) {
+        try {
             ArrayList<Artwork> artworks = null;
 
             //Sorting
-            if(sortby != null)
+            if (sortby != null)
                 artworks = ArtworkManager.getInstance().getArtworkListSortedByLikes(sortby);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw handleException("GET /explores/all", e);
         }
     }
@@ -116,17 +121,17 @@ public class ExploreHttpInterface extends HttpInterface {
     @GET
     @Path("/sorttime")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getArtworksSortedByTime( @QueryParam("sortby") String sortby){
-        try{
+    public Response getArtworksSortedByTime(@QueryParam("sortby") String sortby) {
+        try {
             ArrayList<Artwork> artworks = null;
 
             //Sorting
-            if(sortby != null)
+            if (sortby != null)
                 artworks = ArtworkManager.getInstance().getArtworkListSortedByTime(sortby);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw handleException("GET /explores/all", e);
         }
     }
@@ -134,15 +139,15 @@ public class ExploreHttpInterface extends HttpInterface {
     @GET
     @Path("/filter")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getArtworksFilteredByStyles( @QueryParam("student") String filter){
-        try{
+    public Response getArtworksFilteredByStyles(@QueryParam("student") String filter) {
+        try {
             ArrayList<Artwork> artworks = null;
 
             artworks = ArtworkManager.getInstance().getAllArtworksFilteredByOwners(filter);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw handleException("GET /explores/all", e);
         }
     }

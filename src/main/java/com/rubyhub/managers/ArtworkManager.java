@@ -1,10 +1,7 @@
 package com.rubyhub.managers;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.model.Filters;
 import com.rubyhub.exceptions.AppException;
-import com.rubyhub.exceptions.AppInternalServerException;
 import com.rubyhub.models.Artwork;
 import com.rubyhub.utils.AppLogger;
 import org.apache.commons.io.IOUtils;
@@ -14,8 +11,6 @@ import org.bson.types.Binary;
 import org.bson.types.ObjectId;
 import org.codehaus.jettison.json.JSONArray;
 
-import javax.print.Doc;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -29,7 +24,7 @@ public class ArtworkManager extends Manager {
             FIELD_NAME = "name", FIELD_DESC = "description", FIELD_PRICE = "price", FIELD_SIZE = "sizes", FIELD_STYLES = "styles",
             FIELD_SOLDOUT = "soldout", FIELD_LIKES = "likes", FIELD_PASS_CHECK = "passedcheck", FIELD_STUDENT = "student", FIELD_FTYPE = "type";
 
-    public static String FIELD_IMAGE_CONTENT = "content",FIELD_IMAGE_TYPE = "type";
+    public static String FIELD_IMAGE_CONTENT = "content", FIELD_IMAGE_TYPE = "type";
 
     public static ArtworkManager getInstance() {
         if (_self == null) {
@@ -66,24 +61,6 @@ public class ArtworkManager extends Manager {
                         .append(FIELD_STYLES, convertJSONArrayToList(styles)).append(FIELD_UPDATED_ON, new Date())))
         ;
         return true;
-    }
-
-    public void updateSize(String id, String size){
-        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
-        Artwork artwork = new Artwork(doc);
-        List<String> newSizes = artwork.setSize(size);
-        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
-                new Document("$set", new Document(FIELD_SIZE, newSizes)))
-        ;
-    }
-
-    public void updateSizeBack(String id){
-        Document doc = this.artworkCollection.find(and(eq(FIELD_ID, id), FILTER_NOT_DELETED)).first();
-        Artwork artwork = new Artwork(doc);
-        List<String> newSizes = artwork.setSizeBack();
-        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id),
-                new Document("$set", new Document(FIELD_SIZE, newSizes)))
-        ;
     }
 
     public boolean markArtworkLikes(String id) {
@@ -141,8 +118,8 @@ public class ArtworkManager extends Manager {
     public Map getArtworkImageById(String id) {
         Map<String, Object> image = new HashMap<>();
         Document doc = this.artworkImageCollection.find(eq(FIELD_ID, id)).first();
-        image.put("type",doc.getString(FIELD_IMAGE_TYPE));
-        image.put("content",doc.get(FIELD_IMAGE_CONTENT, Binary.class).getData());
+        image.put("type", doc.getString(FIELD_IMAGE_TYPE));
+        image.put("content", doc.get(FIELD_IMAGE_CONTENT, Binary.class).getData());
         return image;
     }
 
@@ -174,8 +151,12 @@ public class ArtworkManager extends Manager {
     }
 
     public List<Artwork> getArtworks() {
-        List<Artwork> artworks = new ArrayList<>();
         Iterable<Document> docs = this.artworkCollection.find(FILTER_NOT_DELETED);
+        return castArtworkDoc2List(docs);
+    }
+
+    private List<Artwork> castArtworkDoc2List(Iterable<Document> docs) {
+        List<Artwork> artworks = new ArrayList<>();
         if (docs != null) {
             docs.forEach(doc -> {
                 String id = doc.getString(FIELD_ID);
@@ -192,14 +173,22 @@ public class ArtworkManager extends Manager {
         }
     }
 
+    public List<Artwork> searchArtworks(String query) {
+        Bson searchFilter = eq("$search", query);
+        Iterable<Document> docs = this.artworkCollection.find(and(eq("$text", searchFilter), FILTER_NOT_DELETED));
+        return castArtworkDoc2List(docs);
+    }
+
     public void resetData() {
         this.artworkCollection.drop();
         this.artworkImageCollection.drop();
+
         JSONArray sizes = new JSONArray().put("S").put("M").put("L");
         JSONArray styles = new JSONArray().put("modern").put("abstract");
-        createArtwork("artwork 1", "this is artwork 1", 123.3, sizes, styles, "owner 1");
-        createArtwork("artwork 2", "this is artwork 2", 223.3, sizes, styles, "owner 2");
-        createArtwork("artwork 3", "this is artwork 3", 323.3, sizes, styles, "owner 3");
+        createArtwork("artwork apple", "this is artwork 1", 123.3, sizes, styles, "owner 1");
+        createArtwork("artwork 2", "this is artwork orange", 223.3, sizes, styles, "owner 2");
+        createArtwork("orange 3", "this is artwork 3", 323.3, sizes, styles, "owner 3");
+        this.artworkCollection.createIndex(new Document().append(FIELD_NAME, "text").append(FIELD_DESC, "text"));
     }
 
     public ArrayList<Artwork> getArtworkListSortedByLikes(String sortby) throws AppException {
