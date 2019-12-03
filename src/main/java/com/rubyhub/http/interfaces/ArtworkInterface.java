@@ -106,7 +106,6 @@ public class ArtworkInterface extends HttpInterface {
     public Response artworkGetAll(
     ) {
         try {
-            // todo: add file type check
             List<Artwork> artworks = ArtworkManager.getInstance().getArtworks();
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));

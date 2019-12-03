@@ -20,18 +20,18 @@ public class PaymentManager extends Manager {
         return price != 0;
     }
 
-    public Boolean doPayment(Double amount) {
-
-        String approvedOrderId = null;
-        try {
-            approvedOrderId = PayPalClient.createOrder(amount).getString("id");
-        } catch (JSONException e) {
-            return false;
-        }
-        String captureId = PayPalClient.captureOrder(approvedOrderId);
-        return PayPalClient.getPaymentResult(captureId);
-
-    }
+//    public Boolean doPayment(double amount) {
+//
+//        String approvedOrderId = null;
+//        try {
+//            approvedOrderId = PayPalClient.createOrder(amount).getString("id");
+//        } catch (JSONException e) {
+//            return false;
+//        }
+//        String captureId = PayPalClient.captureOrder(approvedOrderId);
+//        return PayPalClient.getPaymentResult(captureId);
+//
+//    }
 
     public JSONObject createPayment(Double amount) {
         return PayPalClient.createOrder(amount);

@@ -64,7 +64,7 @@ public class Artwork {
     }
 
     public void setImage(String  id, String type) {
-        this.image = "/artworks/image/" + id + "." + type;
+        this.image = "/rubyhub/api/artworks/image/" + id + "." + type;
     }
 
     public String getImage(){

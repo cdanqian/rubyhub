@@ -141,7 +141,11 @@ public class ShoppingCartManager extends Manager {
         ArrayList<CartItem> items = this.getCartById(cartId);
         double price = 0.0;
         for (CartItem item : items) {
-            price += PricingManager.getInstance().getPrice(item.getId(), item.getSize()).getTotal();
+            try {
+                price += PricingManager.getInstance().getPrice(item.getId(), item.getSize()).getTotal();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
         return PaymentManager.getInstance().doPayment(price);
     }

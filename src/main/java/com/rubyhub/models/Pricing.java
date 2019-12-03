@@ -15,7 +15,7 @@ public class Pricing {
     }
 
     public Double getTotal() {
-        return this.getTotal();
+        return total;
     }
 
     public JSONObject castToJSON() {

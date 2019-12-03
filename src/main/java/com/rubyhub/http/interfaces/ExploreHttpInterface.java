@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rubyhub.http.responses.ServiceResponse;
 import com.rubyhub.http.utils.PATCH;
-import com.rubyhub.managers.ArtworkManager;
+import com.rubyhub.managers.ExploreManager;
 import com.rubyhub.models.Artwork;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
@@ -40,7 +40,7 @@ public class ExploreHttpInterface extends HttpInterface {
     @Produces({MediaType.APPLICATION_JSON})
     public Response artworkRootReset() {
         try {
-            ArtworkManager.getInstance().resetData();
+            ExploreManager.getInstance().resetData();
             return ServiceResponse.response200("Artwork resource has been reset");
         } catch (Exception e) {
             return Response.status(404).entity("Service is not available now, please try later").build();
@@ -50,15 +50,26 @@ public class ExploreHttpInterface extends HttpInterface {
     @GET
     @Path("/all")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response artworkGetAll(@QueryParam("q") String query) {
+    public Response artworkGetAll(@QueryParam("q") String query,
+                                  @QueryParam("filter") String filter,
+                                  @QueryParam("sortby") String sortby,
+                                  @QueryParam("offset") Integer offset,
+                                  @QueryParam("count") Integer count
+    ) {
+
         List<Artwork> artworks = new ArrayList<Artwork>();
-        System.out.println(query);
+        if (filter == null) filter = "";
+        if (sortby == null) sortby = "";
+        if (offset == null || count == null) {
+            offset = 0;
+            count = 10;
+        }
+
         try {
             if (query != null) {
-
-                artworks = ArtworkManager.getInstance().searchArtworks(query);
+                artworks = ExploreManager.getInstance().searchArtworks(query, filter, sortby, offset, count);
             } else {
-                artworks = ArtworkManager.getInstance().getArtworks();
+                artworks = ExploreManager.getInstance().getArtworks();
             }
 
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
@@ -73,7 +84,7 @@ public class ExploreHttpInterface extends HttpInterface {
     @Produces({MediaType.APPLICATION_JSON})
     public Response artworkLikesPatchById(@PathParam("id") String id) {
         try {
-            Boolean updated = ArtworkManager.getInstance().markArtworkLikes(id);
+            Boolean updated = ExploreManager.getInstance().markArtworkLikes(id, true);
             if (!updated) {
                 return ServiceResponse.response400("ID is not valid");
             }
@@ -88,7 +99,7 @@ public class ExploreHttpInterface extends HttpInterface {
     @Produces({MediaType.APPLICATION_JSON})
     public Response artworkCancelLikesById(@PathParam("id") String id) {
         try {
-            Boolean updated = ArtworkManager.getInstance().unMarkArtworkLikes(id);
+            Boolean updated = ExploreManager.getInstance().markArtworkLikes(id, false);
             if (!updated) {
                 return ServiceResponse.response400("ID is not valid");
             }
@@ -108,7 +119,7 @@ public class ExploreHttpInterface extends HttpInterface {
 
             //Sorting
             if (sortby != null)
-                artworks = ArtworkManager.getInstance().getArtworkListSortedByLikes(sortby);
+                artworks = ExploreManager.getInstance().getArtworkListSortedByLikes(sortby);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
 
@@ -124,13 +135,11 @@ public class ExploreHttpInterface extends HttpInterface {
     public Response getArtworksSortedByTime(@QueryParam("sortby") String sortby) {
         try {
             ArrayList<Artwork> artworks = null;
-
             //Sorting
             if (sortby != null)
-                artworks = ArtworkManager.getInstance().getArtworkListSortedByTime(sortby);
+                artworks = ExploreManager.getInstance().getArtworkListSortedByTime(sortby);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
-
         } catch (Exception e) {
             throw handleException("GET /explores/all", e);
         }
@@ -142,8 +151,7 @@ public class ExploreHttpInterface extends HttpInterface {
     public Response getArtworksFilteredByStyles(@QueryParam("student") String filter) {
         try {
             ArrayList<Artwork> artworks = null;
-
-            artworks = ArtworkManager.getInstance().getAllArtworksFilteredByOwners(filter);
+            artworks = ExploreManager.getInstance().getAllArtworksFilteredByOwners(filter);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
 
