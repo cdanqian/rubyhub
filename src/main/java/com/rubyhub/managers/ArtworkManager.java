@@ -64,8 +64,7 @@ public class ArtworkManager extends Manager {
     }
 
     public Boolean uploadArtworkImage(String id, InputStream image, String type) {
-        String source = "";
-        if (!inspectImageContent()) return false;
+
         try {
             byte[] encoded = IOUtils.toByteArray(image);
 
@@ -102,9 +101,9 @@ public class ArtworkManager extends Manager {
         return image;
     }
 
-    public Boolean inspectImageContent() {
-        // todo: image inspection
-        return true;
+    public Boolean inspectImageContent(InputStream image, String type) {
+        ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(image, type);
+        return inspectionManager.getPassed();
     }
 
 

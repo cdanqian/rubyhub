@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rubyhub.http.responses.ServiceResponse;
 import com.rubyhub.http.utils.PATCH;
 import com.rubyhub.managers.ArtworkManager;
+import com.rubyhub.managers.ImageInspectionManager;
 import com.rubyhub.models.Artwork;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
@@ -15,7 +16,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -144,10 +144,14 @@ public class ArtworkInterface extends HttpInterface {
             @FormDataParam("image") FormDataContentDisposition fdc
     ) {
         try {
-            //todo: get file type from FormDataContentDisposition
-            String ftype = fdc.getFileName().split("\\.")[1];
-            ArtworkManager.getInstance().uploadArtworkImage(id, image, ftype);
-            return ServiceResponse.response200("Uploaded");
+            String fileType = fdc.getFileName().split("\\.")[1];
+            ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(image, fileType);
+            if (inspectionManager.getPassed()) {
+                ArtworkManager.getInstance().uploadArtworkImage(id, image, fileType);
+                return ServiceResponse.response200("Image uploaded");
+            }
+            return ServiceResponse.response400(new JSONObject()
+                    .put("messages", new JSONArray(inspectionManager.getMessages())));
         } catch (Exception e) {
             return Response.status(400).entity(e.getMessage()).build();
         }

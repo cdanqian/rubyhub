@@ -22,6 +22,8 @@ dependencies {
     compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
     compile 'org.glassfish.jersey.inject:jersey-hk2:2.27'
     compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jettison', version: '2.27'
+// https://mvnrepository.com/artifact/javax.servlet/servlet-api
+    providedCompile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
 
     compile 'org.glassfish.jersey.media:jersey-media-json-jackson:2.27'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-json-org:2.0.0'
@@ -37,6 +39,9 @@ dependencies {
     compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-csv', version: '2.9.5'
     compile group: 'org.codehaus.jettison', name: 'jettison', version: '1.4.0'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile 'com.google.cloud:google-cloud-dlp:0.117.0-beta'
+// https://mvnrepository.com/artifact/com.google.cloud/google-cloud-core
+    compile group: 'com.google.cloud', name: 'google-cloud-core', version: '1.80.0'
 
     // https://mvnrepository.com/artifact/com.paypal.sdk/checkout-sdk
     compile group: 'com.paypal.sdk', name: 'checkout-sdk', version: '1.0.2'

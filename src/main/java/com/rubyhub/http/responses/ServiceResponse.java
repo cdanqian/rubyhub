@@ -15,7 +15,7 @@ public class ServiceResponse {
     }
     public static Response response400(Object content) {
         try {
-            return Response.ok(new JSONObject().put("data", content).put("success", false).put("httpStatusCode", 400), MediaType.APPLICATION_JSON).build();
+            return Response.status(400).entity(new JSONObject().put("data", content).put("success", false).put("httpStatusCode", 400)).build();
         } catch (Exception e) {
             return Response.status(400).entity("Error while response encoding").build();
         }

@@ -154,7 +154,6 @@ public class ExploreHttpInterface extends HttpInterface {
             artworks = ExploreManager.getInstance().getAllArtworksFilteredByOwners(filter);
             List<JSONObject> content = artworks.stream().map(Artwork::castToJSON).collect(toList());
             return ServiceResponse.response200(new JSONArray(content));
-
         } catch (Exception e) {
             throw handleException("GET /explores/all", e);
         }
