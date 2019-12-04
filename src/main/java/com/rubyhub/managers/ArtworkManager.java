@@ -63,33 +63,27 @@ public class ArtworkManager extends Manager {
         return true;
     }
 
-    public Boolean uploadArtworkImage(String id, InputStream image, String type) {
+    public Boolean uploadArtworkImage(String id, byte[] image, String type) {
+        byte[] encoded = image;
 
-        try {
-            byte[] encoded = IOUtils.toByteArray(image);
-
-            long count = this.artworkImageCollection.countDocuments(eq(FIELD_ID, id));
-            if (count == 0) {
-                this.artworkImageCollection.insertOne(new Document(FIELD_ID, id)
-                        .append(FIELD_IMAGE_CONTENT, encoded)
-                        .append(FIELD_FTYPE, type)
-                        .append(FIELD_CREATED_ON, new Date())
-                        .append(FIELD_UPDATED_ON, new Date())
-                );
-            } else {
-                this.artworkImageCollection.findOneAndUpdate(eq(FIELD_ID, id),
-                        new Document("$set", new Document(FIELD_UPDATED_ON, new Date())
-                                .append(FIELD_IMAGE_CONTENT, encoded)
-                                .append(FIELD_FTYPE, type)
-                        ));
-            }
-            this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id), new Document("$set", new Document(FIELD_PASS_CHECK, true).append(FIELD_UPDATED_ON, new Date())));
-
-            return true;
-        } catch (IOException e) {
-            AppLogger.error("Image convert error", e);
-            return false;
+        long count = this.artworkImageCollection.countDocuments(eq(FIELD_ID, id));
+        if (count == 0) {
+            this.artworkImageCollection.insertOne(new Document(FIELD_ID, id)
+                    .append(FIELD_IMAGE_CONTENT, encoded)
+                    .append(FIELD_FTYPE, type)
+                    .append(FIELD_CREATED_ON, new Date())
+                    .append(FIELD_UPDATED_ON, new Date())
+            );
+        } else {
+            this.artworkImageCollection.findOneAndUpdate(eq(FIELD_ID, id),
+                    new Document("$set", new Document(FIELD_UPDATED_ON, new Date())
+                            .append(FIELD_IMAGE_CONTENT, encoded)
+                            .append(FIELD_FTYPE, type)
+                    ));
         }
+        this.artworkCollection.findOneAndUpdate(eq(FIELD_ID, id), new Document("$set", new Document(FIELD_PASS_CHECK, true).append(FIELD_UPDATED_ON, new Date())));
+
+        return true;
 
     }
 
@@ -101,7 +95,7 @@ public class ArtworkManager extends Manager {
         return image;
     }
 
-    public Boolean inspectImageContent(InputStream image, String type) {
+    public Boolean inspectImageContent(byte[] image, String type) {
         ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(image, type);
         return inspectionManager.getPassed();
     }

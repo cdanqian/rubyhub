@@ -22,7 +22,7 @@ public class GoogleDLPClient {
     private static String PROJECT_ID = "rubyhub";
 
     private GoogleDLPClient() {
-        File configFile = new File("config/Rubyhub-f691186615de.json");
+        File configFile = new File("/Users/qiandan/IdeaProjects/rubyhub/src/main/java/com/rubyhub/config/Rubyhub-f691186615de.json");
 
         CredentialsProvider credentialsProvider = null;
         try {

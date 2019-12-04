@@ -21,9 +21,9 @@ public class ImageInspectionManager extends Manager {
         return _self;
     }
 
-    public ImageInspectionManager doInspection(InputStream image, String type) {
+    public ImageInspectionManager doInspection(byte[] image, String type) {
         try {
-            Map<Boolean, ArrayList<String>> result = GoogleDLPClient.getInstance().setImageType(type).inspectImage(IOUtils.toByteArray(image));
+            Map<Boolean, ArrayList<String>> result = GoogleDLPClient.getInstance().setImageType(type).inspectImage(image);
             for (Map.Entry<Boolean, ArrayList<String>> entry : result.entrySet()) {
                 this.passed = entry.getKey();
                 this.messages = entry.getValue();

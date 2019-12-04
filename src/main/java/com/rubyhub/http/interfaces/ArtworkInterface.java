@@ -7,6 +7,7 @@ import com.rubyhub.http.utils.PATCH;
 import com.rubyhub.managers.ArtworkManager;
 import com.rubyhub.managers.ImageInspectionManager;
 import com.rubyhub.models.Artwork;
+import org.apache.commons.io.IOUtils;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -15,6 +16,7 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -145,9 +147,12 @@ public class ArtworkInterface extends HttpInterface {
     ) {
         try {
             String fileType = fdc.getFileName().split("\\.")[1];
-            ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(image, fileType);
+//            InputStream imageCopy = new ByteArrayInputStream(IOUtils.toByteArray(image));
+            byte[] imageCopy1 = IOUtils.toByteArray(image);
+            byte[] imageCopy2 = imageCopy1;
+            ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(imageCopy1, fileType);
             if (inspectionManager.getPassed()) {
-                ArtworkManager.getInstance().uploadArtworkImage(id, image, fileType);
+                ArtworkManager.getInstance().uploadArtworkImage(id, imageCopy2, fileType);
                 return ServiceResponse.response200("Image uploaded");
             }
             return ServiceResponse.response400(new JSONObject()

@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rubyhub.http.responses.ServiceResponse;
 import com.rubyhub.managers.ImageInspectionManager;
+import org.apache.commons.io.IOUtils;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import sun.nio.ch.IOUtil;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -43,7 +45,7 @@ public class ImageInspectionInterface {
         try {
             //todo: get file type from FormDataContentDisposition
             String fileType = fdc.getFileName().split("\\.")[1];
-            ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(image, fileType);
+            ImageInspectionManager inspectionManager = ImageInspectionManager.getInstance().doInspection(IOUtils.toByteArray(image), fileType);
 
             return ServiceResponse.response200(new JSONObject()
                     .put("passed_check", inspectionManager.getPassed())
